@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.13.11 on win32)" generated="2026-01-11T18:51:30.084297" rpa="false" schemaversion="5">
+<suite id="s1" name="MyFirstProject" source="C:\Users\Houssem\Desktop\QA_CSF\CSF_Robotframework\Robotframework\MyFirstProject.robot">
+<test id="s1-t1" name="Connect to saucedemo.com and closer browser" line="73">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-01-11T18:51:30.721355" level="INFO">login</msg>
+<arg>login</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-01-11T18:51:30.720965" elapsed="0.000483"/>
+</kw>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:30.722322" level="INFO">Opening browser 'chrome' to base url 'https://www.saucedemo.com/'.</msg>
+<arg>${url}</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-01-11T18:51:30.722015" elapsed="2.337652"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:33.061725" level="INFO">Typing text 'standard_user' into text field 'user-name'.</msg>
+<arg>user-name</arg>
+<arg>${user-name}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.060685" elapsed="0.302142"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:33.363847" level="INFO">Typing text 'secret_sauce' into text field 'password'.</msg>
+<arg>password</arg>
+<arg>${password}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.363379" elapsed="0.141178"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:33.505333" level="INFO">Clicking element 'css=#login-button'.</msg>
+<arg>css=#login-button</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.505026" elapsed="0.156422"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>css=#inventory_container</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.662086" elapsed="0.039789"/>
+</kw>
+<status status="PASS" start="2026-01-11T18:51:30.719549" elapsed="2.982914"/>
+</test>
+<test id="s1-t2" name="Read All SauceDemo Products" line="81">
+<kw name="Get Products List With Details">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-01-11T18:51:33.705816" level="INFO">products list</msg>
+<arg>products list</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.705347" elapsed="0.000567"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-01-11T18:51:33.706585" level="INFO">@{products} = [ ]</msg>
+<var>@{products}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.706113" elapsed="0.000535"/>
+</kw>
+<kw name="Get WebElements" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:33.724748" level="INFO">@{items} = [ &lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.19")&gt; | &lt;selenium.webdr...</msg>
+<var>@{items}</var>
+<arg>css=.inventory_item</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.706843" elapsed="0.017989"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:33.767599" level="INFO">${name} = Sauce Labs Backpack</msg>
+<var>${name}</var>
+<arg>css=.inventory_item_name</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.725567" elapsed="0.042113"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:33.803833" level="INFO">${price} = $29.99</msg>
+<var>${price}</var>
+<arg>css=.inventory_item_price</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.767959" elapsed="0.035949"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:33.840964" level="INFO">${desc} = carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</msg>
+<var>${desc}</var>
+<arg>css=.inventory_item_desc</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.804166" elapsed="0.036903"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-11T18:51:33.842275" level="INFO">&amp;{product} = { name=Sauce Labs Backpack | price=$29.99 | description=carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. }</msg>
+<var>&amp;{product}</var>
+<arg>name=${name}</arg>
+<arg>price=${price}</arg>
+<arg>description=${desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.841372" elapsed="0.000972"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${products}</arg>
+<arg>${product}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.842588" elapsed="0.000416"/>
+</kw>
+<var name="${item}">&lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.19")&gt;</var>
+<status status="PASS" start="2026-01-11T18:51:33.725372" elapsed="0.117732"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:33.874629" level="INFO">${name} = Sauce Labs Backpack</msg>
+<var>${name}</var>
+<arg>css=.inventory_item_name</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.843557" elapsed="0.031158"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:33.912945" level="INFO">${price} = $29.99</msg>
+<var>${price}</var>
+<arg>css=.inventory_item_price</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.874997" elapsed="0.038171"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.005485" level="INFO">${desc} = carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</msg>
+<var>${desc}</var>
+<arg>css=.inventory_item_desc</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:33.913638" elapsed="0.092040"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-11T18:51:34.008507" level="INFO">&amp;{product} = { name=Sauce Labs Backpack | price=$29.99 | description=carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. }</msg>
+<var>&amp;{product}</var>
+<arg>name=${name}</arg>
+<arg>price=${price}</arg>
+<arg>description=${desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.006359" elapsed="0.002363"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${products}</arg>
+<arg>${product}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.009314" elapsed="0.000906"/>
+</kw>
+<var name="${item}">&lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.20")&gt;</var>
+<status status="PASS" start="2026-01-11T18:51:33.843380" elapsed="0.167096"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.083753" level="INFO">${name} = Sauce Labs Backpack</msg>
+<var>${name}</var>
+<arg>css=.inventory_item_name</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.012097" elapsed="0.071830"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.156873" level="INFO">${price} = $29.99</msg>
+<var>${price}</var>
+<arg>css=.inventory_item_price</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.084614" elapsed="0.072540"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.281927" level="INFO">${desc} = carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</msg>
+<var>${desc}</var>
+<arg>css=.inventory_item_desc</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.158123" elapsed="0.124134"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-11T18:51:34.287277" level="INFO">&amp;{product} = { name=Sauce Labs Backpack | price=$29.99 | description=carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. }</msg>
+<var>&amp;{product}</var>
+<arg>name=${name}</arg>
+<arg>price=${price}</arg>
+<arg>description=${desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.283404" elapsed="0.004189"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${products}</arg>
+<arg>${product}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.288557" elapsed="0.001660"/>
+</kw>
+<var name="${item}">&lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.21")&gt;</var>
+<status status="PASS" start="2026-01-11T18:51:34.011656" elapsed="0.279039"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.366693" level="INFO">${name} = Sauce Labs Backpack</msg>
+<var>${name}</var>
+<arg>css=.inventory_item_name</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.292564" elapsed="0.074410"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.438918" level="INFO">${price} = $29.99</msg>
+<var>${price}</var>
+<arg>css=.inventory_item_price</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.367900" elapsed="0.071202"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.508936" level="INFO">${desc} = carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</msg>
+<var>${desc}</var>
+<arg>css=.inventory_item_desc</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.439769" elapsed="0.069358"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-11T18:51:34.512290" level="INFO">&amp;{product} = { name=Sauce Labs Backpack | price=$29.99 | description=carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. }</msg>
+<var>&amp;{product}</var>
+<arg>name=${name}</arg>
+<arg>price=${price}</arg>
+<arg>description=${desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.509835" elapsed="0.002640"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${products}</arg>
+<arg>${product}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.513046" elapsed="0.000936"/>
+</kw>
+<var name="${item}">&lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.22")&gt;</var>
+<status status="PASS" start="2026-01-11T18:51:34.291821" elapsed="0.222414"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.587471" level="INFO">${name} = Sauce Labs Backpack</msg>
+<var>${name}</var>
+<arg>css=.inventory_item_name</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.515441" elapsed="0.072217"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.652535" level="INFO">${price} = $29.99</msg>
+<var>${price}</var>
+<arg>css=.inventory_item_price</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.588328" elapsed="0.064370"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.711860" level="INFO">${desc} = carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</msg>
+<var>${desc}</var>
+<arg>css=.inventory_item_desc</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.653236" elapsed="0.058794"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-11T18:51:34.714458" level="INFO">&amp;{product} = { name=Sauce Labs Backpack | price=$29.99 | description=carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. }</msg>
+<var>&amp;{product}</var>
+<arg>name=${name}</arg>
+<arg>price=${price}</arg>
+<arg>description=${desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.712610" elapsed="0.001995"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${products}</arg>
+<arg>${product}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.715083" elapsed="0.000808"/>
+</kw>
+<var name="${item}">&lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.23")&gt;</var>
+<status status="PASS" start="2026-01-11T18:51:34.515009" elapsed="0.201108"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.774786" level="INFO">${name} = Sauce Labs Backpack</msg>
+<var>${name}</var>
+<arg>css=.inventory_item_name</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.716991" elapsed="0.057958"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.836284" level="INFO">${price} = $29.99</msg>
+<var>${price}</var>
+<arg>css=.inventory_item_price</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.775492" elapsed="0.060954"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.896936" level="INFO">${desc} = carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</msg>
+<var>${desc}</var>
+<arg>css=.inventory_item_desc</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.837034" elapsed="0.060096"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-11T18:51:34.900439" level="INFO">&amp;{product} = { name=Sauce Labs Backpack | price=$29.99 | description=carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. }</msg>
+<var>&amp;{product}</var>
+<arg>name=${name}</arg>
+<arg>price=${price}</arg>
+<arg>description=${desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.897833" elapsed="0.004846"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${products}</arg>
+<arg>${product}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.903581" elapsed="0.001104"/>
+</kw>
+<var name="${item}">&lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.24")&gt;</var>
+<status status="PASS" start="2026-01-11T18:51:34.716632" elapsed="0.188309"/>
+</iter>
+<var>${item}</var>
+<value>@{items}</value>
+<status status="PASS" start="2026-01-11T18:51:33.725001" elapsed="1.180217"/>
+</for>
+<return>
+<value>${products}</value>
+<status status="PASS" start="2026-01-11T18:51:34.905552" elapsed="0.000237"/>
+</return>
+<msg time="2026-01-11T18:51:34.906599" level="INFO">@{product_list} = [ {'name': 'Sauce Labs Backpack', 'price': '$29.99', 'description': 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protecti...</msg>
+<var>@{product_list}</var>
+<status status="PASS" start="2026-01-11T18:51:33.704813" elapsed="1.201926"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\n===== PRODUCT LIST =====</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.907722" elapsed="0.001584"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Name: ${p['name']} | Price: ${p['price']} | Desc: ${p['description']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.911186" elapsed="0.005365"/>
+</kw>
+<var name="${p}">{'name': 'Sauce Labs Backpack', 'price': '$29.99', 'description': 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection...</var>
+<status status="PASS" start="2026-01-11T18:51:34.910772" elapsed="0.006039"/>
+</iter>
+<iter>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Name: ${p['name']} | Price: ${p['price']} | Desc: ${p['description']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.917655" elapsed="0.005078"/>
+</kw>
+<var name="${p}">{'name': 'Sauce Labs Backpack', 'price': '$29.99', 'description': 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection...</var>
+<status status="PASS" start="2026-01-11T18:51:34.917294" elapsed="0.005693"/>
+</iter>
+<iter>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Name: ${p['name']} | Price: ${p['price']} | Desc: ${p['description']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.923815" elapsed="0.005154"/>
+</kw>
+<var name="${p}">{'name': 'Sauce Labs Backpack', 'price': '$29.99', 'description': 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection...</var>
+<status status="PASS" start="2026-01-11T18:51:34.923456" elapsed="0.005762"/>
+</iter>
+<iter>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Name: ${p['name']} | Price: ${p['price']} | Desc: ${p['description']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.930083" elapsed="0.005402"/>
+</kw>
+<var name="${p}">{'name': 'Sauce Labs Backpack', 'price': '$29.99', 'description': 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection...</var>
+<status status="PASS" start="2026-01-11T18:51:34.929689" elapsed="0.006053"/>
+</iter>
+<iter>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Name: ${p['name']} | Price: ${p['price']} | Desc: ${p['description']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.936585" elapsed="0.005169"/>
+</kw>
+<var name="${p}">{'name': 'Sauce Labs Backpack', 'price': '$29.99', 'description': 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection...</var>
+<status status="PASS" start="2026-01-11T18:51:34.936210" elapsed="0.005805"/>
+</iter>
+<iter>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Name: ${p['name']} | Price: ${p['price']} | Desc: ${p['description']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.942932" elapsed="0.005263"/>
+</kw>
+<var name="${p}">{'name': 'Sauce Labs Backpack', 'price': '$29.99', 'description': 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection...</var>
+<status status="PASS" start="2026-01-11T18:51:34.942482" elapsed="0.006052"/>
+</iter>
+<var>${p}</var>
+<value>@{product_list}</value>
+<status status="PASS" start="2026-01-11T18:51:34.910082" elapsed="0.038679"/>
+</for>
+<status status="PASS" start="2026-01-11T18:51:33.703654" elapsed="1.246137"/>
+</test>
+<test id="s1-t3" name="Compare Products With Expected List" line="88">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>===== START PRODUCT COMPARISON =====</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.953877" elapsed="0.001555"/>
+</kw>
+<kw name="Get Products List With Details">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-01-11T18:51:34.958676" level="INFO">products list</msg>
+<arg>products list</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.957806" elapsed="0.001139"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-01-11T18:51:34.960475" level="INFO">@{products} = [ ]</msg>
+<var>@{products}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.959462" elapsed="0.001139"/>
+</kw>
+<kw name="Get WebElements" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:34.991691" level="INFO">@{items} = [ &lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.19")&gt; | &lt;selenium.webdr...</msg>
+<var>@{items}</var>
+<arg>css=.inventory_item</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.961227" elapsed="0.030678"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.056815" level="INFO">${name} = Sauce Labs Backpack</msg>
+<var>${name}</var>
+<arg>css=.inventory_item_name</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:34.993375" elapsed="0.063602"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.120312" level="INFO">${price} = $29.99</msg>
+<var>${price}</var>
+<arg>css=.inventory_item_price</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.057549" elapsed="0.062929"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.179683" level="INFO">${desc} = carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</msg>
+<var>${desc}</var>
+<arg>css=.inventory_item_desc</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.121067" elapsed="0.058784"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-11T18:51:35.183186" level="INFO">&amp;{product} = { name=Sauce Labs Backpack | price=$29.99 | description=carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. }</msg>
+<var>&amp;{product}</var>
+<arg>name=${name}</arg>
+<arg>price=${price}</arg>
+<arg>description=${desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.180424" elapsed="0.003164"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${products}</arg>
+<arg>${product}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.184110" elapsed="0.000794"/>
+</kw>
+<var name="${item}">&lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.19")&gt;</var>
+<status status="PASS" start="2026-01-11T18:51:34.992970" elapsed="0.192153"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.244934" level="INFO">${name} = Sauce Labs Backpack</msg>
+<var>${name}</var>
+<arg>css=.inventory_item_name</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.186044" elapsed="0.059054"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.304224" level="INFO">${price} = $29.99</msg>
+<var>${price}</var>
+<arg>css=.inventory_item_price</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.245690" elapsed="0.058698"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.364474" level="INFO">${desc} = carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</msg>
+<var>${desc}</var>
+<arg>css=.inventory_item_desc</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.304938" elapsed="0.059708"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-11T18:51:35.367140" level="INFO">&amp;{product} = { name=Sauce Labs Backpack | price=$29.99 | description=carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. }</msg>
+<var>&amp;{product}</var>
+<arg>name=${name}</arg>
+<arg>price=${price}</arg>
+<arg>description=${desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.365231" elapsed="0.002056"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${products}</arg>
+<arg>${product}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.367771" elapsed="0.000823"/>
+</kw>
+<var name="${item}">&lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.20")&gt;</var>
+<status status="PASS" start="2026-01-11T18:51:35.185681" elapsed="0.183143"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.428313" level="INFO">${name} = Sauce Labs Backpack</msg>
+<var>${name}</var>
+<arg>css=.inventory_item_name</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.369709" elapsed="0.058771"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.487020" level="INFO">${price} = $29.99</msg>
+<var>${price}</var>
+<arg>css=.inventory_item_price</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.429029" elapsed="0.058156"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.546515" level="INFO">${desc} = carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</msg>
+<var>${desc}</var>
+<arg>css=.inventory_item_desc</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.487728" elapsed="0.058958"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-11T18:51:35.550196" level="INFO">&amp;{product} = { name=Sauce Labs Backpack | price=$29.99 | description=carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. }</msg>
+<var>&amp;{product}</var>
+<arg>name=${name}</arg>
+<arg>price=${price}</arg>
+<arg>description=${desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.547326" elapsed="0.003109"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${products}</arg>
+<arg>${product}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.551214" elapsed="0.000890"/>
+</kw>
+<var name="${item}">&lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.21")&gt;</var>
+<status status="PASS" start="2026-01-11T18:51:35.369351" elapsed="0.182997"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.612667" level="INFO">${name} = Sauce Labs Backpack</msg>
+<var>${name}</var>
+<arg>css=.inventory_item_name</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.553259" elapsed="0.059577"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.672362" level="INFO">${price} = $29.99</msg>
+<var>${price}</var>
+<arg>css=.inventory_item_price</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.613392" elapsed="0.059133"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.731410" level="INFO">${desc} = carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</msg>
+<var>${desc}</var>
+<arg>css=.inventory_item_desc</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.673069" elapsed="0.058516"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-11T18:51:35.734053" level="INFO">&amp;{product} = { name=Sauce Labs Backpack | price=$29.99 | description=carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. }</msg>
+<var>&amp;{product}</var>
+<arg>name=${name}</arg>
+<arg>price=${price}</arg>
+<arg>description=${desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.732164" elapsed="0.002033"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${products}</arg>
+<arg>${product}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.734714" elapsed="0.000789"/>
+</kw>
+<var name="${item}">&lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.22")&gt;</var>
+<status status="PASS" start="2026-01-11T18:51:35.552860" elapsed="0.182864"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.795177" level="INFO">${name} = Sauce Labs Backpack</msg>
+<var>${name}</var>
+<arg>css=.inventory_item_name</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.736587" elapsed="0.058753"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.854473" level="INFO">${price} = $29.99</msg>
+<var>${price}</var>
+<arg>css=.inventory_item_price</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.796248" elapsed="0.058391"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:35.937940" level="INFO">${desc} = carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</msg>
+<var>${desc}</var>
+<arg>css=.inventory_item_desc</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.855181" elapsed="0.082931"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-11T18:51:35.940621" level="INFO">&amp;{product} = { name=Sauce Labs Backpack | price=$29.99 | description=carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. }</msg>
+<var>&amp;{product}</var>
+<arg>name=${name}</arg>
+<arg>price=${price}</arg>
+<arg>description=${desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.938690" elapsed="0.002075"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${products}</arg>
+<arg>${product}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.941429" elapsed="0.000790"/>
+</kw>
+<var name="${item}">&lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.23")&gt;</var>
+<status status="PASS" start="2026-01-11T18:51:35.736233" elapsed="0.206213"/>
+</iter>
+<iter>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:36.001908" level="INFO">${name} = Sauce Labs Backpack</msg>
+<var>${name}</var>
+<arg>css=.inventory_item_name</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:35.943369" elapsed="0.058709"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:36.061771" level="INFO">${price} = $29.99</msg>
+<var>${price}</var>
+<arg>css=.inventory_item_price</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.002634" elapsed="0.059308"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-01-11T18:51:36.122758" level="INFO">${desc} = carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</msg>
+<var>${desc}</var>
+<arg>css=.inventory_item_desc</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.062567" elapsed="0.060362"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-01-11T18:51:36.125356" level="INFO">&amp;{product} = { name=Sauce Labs Backpack | price=$29.99 | description=carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. }</msg>
+<var>&amp;{product}</var>
+<arg>name=${name}</arg>
+<arg>price=${price}</arg>
+<arg>description=${desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.123512" elapsed="0.001990"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${products}</arg>
+<arg>${product}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.125975" elapsed="0.000785"/>
+</kw>
+<var name="${item}">&lt;selenium.webdriver.remote.webelement.WebElement (session="d9ac11c88d359b663098605b9f713a56", element="f.5CFE945094D8EC838CDF4197843FCE58.d.340B6C4F5A5B53CC24AA898C75C3EF03.e.24")&gt;</var>
+<status status="PASS" start="2026-01-11T18:51:35.942962" elapsed="0.184020"/>
+</iter>
+<var>${item}</var>
+<value>@{items}</value>
+<status status="PASS" start="2026-01-11T18:51:34.992244" elapsed="1.134957"/>
+</for>
+<return>
+<value>${products}</value>
+<status status="PASS" start="2026-01-11T18:51:36.127488" elapsed="0.000196"/>
+</return>
+<msg time="2026-01-11T18:51:36.128466" level="INFO">@{ui_products} = [ {'name': 'Sauce Labs Backpack', 'price': '$29.99', 'description': 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protecti...</msg>
+<var>@{ui_products}</var>
+<status status="PASS" start="2026-01-11T18:51:34.956789" elapsed="1.171816"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-01-11T18:51:36.131154" level="INFO">Length is 6.</msg>
+<msg time="2026-01-11T18:51:36.131512" level="INFO">${ui_count} = 6</msg>
+<var>${ui_count}</var>
+<arg>${ui_products}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.129651" elapsed="0.001978"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-01-11T18:51:36.133830" level="INFO">Length is 6.</msg>
+<msg time="2026-01-11T18:51:36.134185" level="INFO">${expected_count} = 6</msg>
+<var>${expected_count}</var>
+<arg>${EXPECTED_PRODUCTS}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.132655" elapsed="0.001645"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>UI products count: ${ui_count}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.135238" elapsed="0.001582"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Expected products count: ${expected_count}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.137767" elapsed="0.001658"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${ui_count}</arg>
+<arg>${expected_count}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.140356" elapsed="0.001349"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-01-11T18:51:36.143733" level="INFO">Length is 6.</msg>
+<msg time="2026-01-11T18:51:36.144117" level="INFO">${ui_count} = 6</msg>
+<var>${ui_count}</var>
+<arg>${ui_products}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.142669" elapsed="0.001566"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>--- Comparing product index: ${index} ---</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.146051" elapsed="0.001447"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-01-11T18:51:36.149974" level="INFO">${ui_product} = {'name': 'Sauce Labs Backpack', 'price': '$29.99', 'description': 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection...</msg>
+<var>${ui_product}</var>
+<arg>${ui_products}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.148084" elapsed="0.002110"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-01-11T18:51:36.152939" level="INFO">${expected_product} = {'name': 'Sauce Labs Backpack', 'price': '$29.99', 'description': 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection...</msg>
+<var>${expected_product}</var>
+<arg>${EXPECTED_PRODUCTS}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.150908" elapsed="0.002288"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>UI -&gt; Name: ${ui_product['name']} | Price: ${ui_product['price']} | Desc: ${ui_product['description']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.154118" elapsed="0.007573"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>EXPECTED -&gt; Name: ${expected_product['name']} | Price: ${expected_product['price']} | Desc: ${expected_product['description']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.162478" elapsed="0.008314"/>
+</kw>
+<kw name="Dictionaries Should Be Equal" owner="Collections">
+<arg>${ui_product}</arg>
+<arg>${expected_product}</arg>
+<doc>Fails if the given dictionaries are not equal.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.171591" elapsed="0.001277"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>✔ Product ${index} MATCHES</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.173572" elapsed="0.002038"/>
+</kw>
+<var name="${index}">0</var>
+<status status="PASS" start="2026-01-11T18:51:36.145724" elapsed="0.030217"/>
+</iter>
+<iter>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>--- Comparing product index: ${index} ---</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.177266" elapsed="0.001963"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-01-11T18:51:36.182359" level="INFO">${ui_product} = {'name': 'Sauce Labs Backpack', 'price': '$29.99', 'description': 'carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection...</msg>
+<var>${ui_product}</var>
+<arg>${ui_products}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.180230" elapsed="0.002373"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-01-11T18:51:36.185584" level="INFO">${expected_product} = {'name': 'Sauce Labs Bike Light', 'price': '$9.99', 'description': "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting mod...</msg>
+<var>${expected_product}</var>
+<arg>${EXPECTED_PRODUCTS}[${index}]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.183432" elapsed="0.002374"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>UI -&gt; Name: ${ui_product['name']} | Price: ${ui_product['price']} | Desc: ${ui_product['description']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.186497" elapsed="0.005804"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>EXPECTED -&gt; Name: ${expected_product['name']} | Price: ${expected_product['price']} | Desc: ${expected_product['description']}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.192880" elapsed="0.006341"/>
+</kw>
+<kw name="Dictionaries Should Be Equal" owner="Collections">
+<msg time="2026-01-11T18:51:36.201592" level="FAIL">Following keys have different values:
+Key name: Sauce Labs Backpack != Sauce Labs Bike Light
+Key price: $29.99 != $9.99
+Key description: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. != A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes.</msg>
+<arg>${ui_product}</arg>
+<arg>${expected_product}</arg>
+<doc>Fails if the given dictionaries are not equal.</doc>
+<status status="FAIL" start="2026-01-11T18:51:36.199980" elapsed="0.002442">Following keys have different values:
+Key name: Sauce Labs Backpack != Sauce Labs Bike Light
+Key price: $29.99 != $9.99
+Key description: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. != A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes.</status>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>✔ Product ${index} MATCHES</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-01-11T18:51:36.203285" elapsed="0.000197"/>
+</kw>
+<var name="${index}">1</var>
+<status status="FAIL" start="2026-01-11T18:51:36.176723" elapsed="0.027181">Following keys have different values:
+Key name: Sauce Labs Backpack != Sauce Labs Bike Light
+Key price: $29.99 != $9.99
+Key description: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. != A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes.</status>
+</iter>
+<var>${index}</var>
+<value>${ui_count}</value>
+<status status="FAIL" start="2026-01-11T18:51:36.145034" elapsed="0.059381">Following keys have different values:
+Key name: Sauce Labs Backpack != Sauce Labs Bike Light
+Key price: $29.99 != $9.99
+Key description: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. != A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes.</status>
+</for>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>===== PRODUCT COMPARISON PASSED =====</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2026-01-11T18:51:36.206117" elapsed="0.000194"/>
+</kw>
+<status status="FAIL" start="2026-01-11T18:51:34.952287" elapsed="1.255158">Following keys have different values:
+Key name: Sauce Labs Backpack != Sauce Labs Bike Light
+Key price: $29.99 != $9.99
+Key description: carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection. != A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes.</status>
+</test>
+<test id="s1-t4" name="close browser" line="124">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-01-11T18:51:36.211980" elapsed="2.298839"/>
+</kw>
+<status status="PASS" start="2026-01-11T18:51:36.210215" elapsed="2.301931"/>
+</test>
+<doc>Connect to saucedemo.com.</doc>
+<status status="FAIL" start="2026-01-11T18:51:30.087795" elapsed="8.428006"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="MyFirstProject" id="s1" pass="3" fail="1" skip="0">MyFirstProject</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
