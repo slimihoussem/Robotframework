@@ -1,15 +1,16 @@
 *** Settings ***
-Documentation  Connect to saucedemo.com.
-#Library  OperatingSystem
-Library  SeleniumLibrary
-Library  Collections
+Documentation     SauceDemo Product Comparison Suite
+Library           SeleniumLibrary
+Library           Collections
+
+Suite Setup       Login To SauceDemo
+Suite Teardown    Close Browser
 
 *** Variables ***
-${url}  https://www.saucedemo.com/
-${user-name}  standard_user
-${password}  secret_sauce
+${url}           https://www.saucedemo.com/
+${user-name}     standard_user
+${password}      secret_sauce
 
-*** Variables ***
 @{EXPECTED_PRODUCTS}
 ...    &{P1}
 ...    &{P2}
@@ -54,7 +55,64 @@ ${password}  secret_sauce
 ...    description=Rib snap infant onesie for the junior automation engineer in development. Reinforced 3-snap bottom closure, two-needle hemmed sleeved and bottom won't unravel.
 ...    image=https://www.saucedemo.com/static/media/red-onesie-1200x1500.2ec615b271ef4c3bc430.jpg
 
+*** Test Cases ***
+Compare Product - Sauce Labs Backpack
+    [Template]    Compare Single Product
+    ${P1}
+
+Compare Product - Sauce Labs Bike Light
+    [Template]    Compare Single Product
+    ${P2}
+
+Compare Product - Sauce Labs Bolt T-Shirt
+    [Template]    Compare Single Product
+    ${P3}
+
+Compare Product - Sauce Labs Fleece Jacket
+    [Template]    Compare Single Product
+    ${P4}
+
+Compare Product - Test.allTheThings() T-Shirt (Red)
+    [Template]    Compare Single Product
+    ${P5}
+
+Compare Product - Sauce Labs Onesie
+    [Template]    Compare Single Product
+    ${P6}
+
 *** Keywords ***
+Login To SauceDemo
+    [Documentation]    Logs in once at the start of the suite
+    Open Browser    ${url}    chrome
+    Input Text      id:user-name    ${user-name}
+    Input Text      id:password     ${password}
+    Click Element   id:login-button
+    Wait Until Element Is Visible    css:#inventory_container
+
+Compare Single Product
+    [Arguments]    ${expected}  # accept dictionary as scalar
+    Log To Console    \n--- Comparing product: ${expected['name']} ---
+    
+    @{ui_products}=    Get Products List With Details
+
+    # Build dictionary keyed by product name
+    &{ui_dict}=    Create Dictionary
+    FOR    ${p}    IN    @{ui_products}
+        Set To Dictionary    ${ui_dict}    ${p['name']}    ${p}
+    END
+
+    ${name}=    Set Variable    ${expected['name']}
+    ${ui_product}=    Get From Dictionary    ${ui_dict}    ${name}    default=None
+
+    Should Not Be Empty    ${ui_product}    Product '${name}' NOT FOUND in UI
+
+    # Compare all fields
+    Should Be Equal    ${ui_product['price']}        ${expected['price']}
+    Should Be Equal    ${ui_product['description']}  ${expected['description']}
+    Should Be Equal    ${ui_product['image']}        ${expected['image']}
+
+    Log To Console    ✔ Product '${name}' MATCHES
+
 Get Products List With Details
     @{products}=    Create List
 
@@ -63,7 +121,7 @@ Get Products List With Details
     @{names}=    Get WebElements    css=.inventory_item_name
     @{prices}=   Get WebElements    css=.inventory_item_price
     @{descs}=    Get WebElements    css=.inventory_item_desc
-    @{images}=    Get WebElements    css=.inventory_item_img img
+    @{images}=   Get WebElements    css=.inventory_item_img img
 
     ${count}=    Get Length    ${names}
 
@@ -83,59 +141,3 @@ Get Products List With Details
     END
 
     RETURN    ${products}
-
-*** Test Cases ***
-Connect to saucedemo.com and closer browser
-    Log  login
-    Open Browser  ${url}  chrome
-	Input Text  user-name  ${user-name} 
-	Input Text  password  ${password}
-	Click Element  css=#login-button
-	Wait Until Element Is visible  css=#inventory_container
-	
-Read All SauceDemo Products
-	@{product_list}=    Get Products List With Details
-    Log To Console    \n===== PRODUCT LIST =====
-    FOR    ${p}    IN    @{product_list}
-        Log To Console    Name: ${p['name']} | Price: ${p['price']} | Desc: ${p['description']} | Image URL: ${p['image']}
-    END
-	
-Compare Products With Expected List
-    Log To Console    ===== START PRODUCT COMPARISON =====
-
-    @{ui_products}=        Get Products List With Details
-    ${ui_count}=           Get Length    ${ui_products}
-    ${expected_count}=     Get Length    ${EXPECTED_PRODUCTS}
-
-    Log To Console    UI products count: ${ui_count}
-    Log To Console    Expected products count: ${expected_count}
-
-    Should Be Equal As Integers    ${ui_count}    ${expected_count}
-
-    # Build a dictionary keyed by product name for easy matching
-    &{ui_dict}=    Create Dictionary
-    FOR    ${p}    IN    @{ui_products}
-        Set To Dictionary    ${ui_dict}    ${p['name']}    ${p}
-    END
-
-    FOR    ${expected}    IN    @{EXPECTED_PRODUCTS}
-        ${name}=    Set Variable    ${expected['name']}
-        Log To Console    --- Comparing product: ${name} ---
-
-        ${ui_product}=    Get From Dictionary    ${ui_dict}    ${name}
-        Log To Console    UI -> Name: ${ui_product['name']} | Price: ${ui_product['price']} | Desc: ${ui_product['description']} | Image: ${ui_product['image']}
-        Log To Console    EXPECTED -> Name: ${expected['name']} | Price: ${expected['price']} | Desc: ${expected['description']} | Image: ${expected['image']}
-
-        # Compare all fields (name, price, description, image)
-        Should Be Equal    ${ui_product['price']}        ${expected['price']}
-        Should Be Equal    ${ui_product['description']}  ${expected['description']}
-        Should Be Equal    ${ui_product['image']}        ${expected['image']}
-
-        Log To Console    ✔ Product '${name}' MATCHES
-    END
-
-    Log To Console    ===== PRODUCT COMPARISON PASSED =====
-
-
-close browser
-	Close Browser
